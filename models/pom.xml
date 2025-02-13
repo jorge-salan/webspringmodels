@@ -5,4 +5,19 @@
 	<groupId>com.arquitecturajava.webspring</groupId>
 	<artifactId>models</artifactId>
 	<version>1</version>
+	<build>
+		<plugins>
+			<!-- Maven Compiler Plugin to set Java version -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version> <!-- Recommended version -->
+				<configuration>
+					<source>17</source>  <!-- Change this to match your installed
+					Java version -->
+					<target>17</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
