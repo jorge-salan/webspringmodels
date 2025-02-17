@@ -5,6 +5,12 @@
 	<groupId>com.arquitecturajava.webspring</groupId>
 	<artifactId>models</artifactId>
 	<version>1</version>
+
+	<properties>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+	</properties>
+
 	<dependencies>
 		<!-- JUnit 5 API -->
 		<dependency>
@@ -21,29 +27,70 @@
 			<version>5.10.3</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Cobertura -->
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>0.8.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-reporting</artifactId>
+			<version>1.10.3</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
 		<plugins>
-			<!-- Maven Compiler Plugin to set Java version -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version> <!-- Recommended version -->
-				<configuration>
-					<source>17</source>  <!-- Change this to match your installed
-					Java version -->
-					<target>17</target>
-				</configuration>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.8</version> <!-- Use the latest version -->
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
-			<!-- Surefire Plugin for Running Tests -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M7</version> <!-- Use a version that supports
-				JUnit 5 -->
+				<version>3.3.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>3.3.1</version>
 			</plugin>
 		</plugins>
 	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>3.3.1</version>
+			</plugin>
+		</plugins>
+	</reporting>
+
 
 </project>
